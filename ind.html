@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+
+  <body>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+      <div class="container mt-10" id="app">
+    <h1>{{titulo}}</h1>
+    
+    <div>
+      <input type="text" class="form-control my-2" v-model="nuevaTarea" v-on:keyup.enter="agregarTarea"></input>
+      </div>
+    <div type="text"v-model="to" id="reportrange" style="background: rgb(238, 238, 238); cursor: pointer; padding: 5px 5px; border: 1px solid #ccc; width: 30%">
+      <i class="fa fa-calendar"></i>&nbsp;
+      <span></span> <i class="fa fa-caret-down"></i>
+ 
+
+  
+    <script type="text/javascript">
+      $(function() {
+      
+          var start = moment().subtract(29, 'days');
+          var end = moment();
+      
+          function cb(start, end) {
+              $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+          }
+      
+          $('#reportrange').daterangepicker({
+              startDate: start,
+              endDate: end
+          }, cb);
+      
+          cb(start, end);
+      
+      });
+      </script>
+    
+</div>
+<div class="mt-3">
+<button class="btn btn-primary" @click="agregarTarea">Agregar tarea</button>
+</div>
+    <!-- Optional JavaScript -->
+ 
+    <div class="mt-3" v-for="(item,ind) of tareas">
+    <div role="alert" :class="['alert',item.estado ? 'alert-success' : 'alert-danger']">
+    <div class="d-flex justify-content-between aliggn-items-center">
+<div>  
+  {{to}} - {{startDate}} - {{ind}} - {{item.nombre}} - {{item.estado}}
+</div>
+<div class="mt-5">
+ </div>
+
+        <div>
+            <button class="btn btn-success btn-sm" @click="editarTarea(ind)">OK</button>
+            <button class="btn btn-danger btn-sm" @click="eliminar(ind)">X</button>
+         </div>
+    </div>
+    </div>  
+</div>
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+</div>
+</body>
+     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <script src="app.js"></script>
+</html>
